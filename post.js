@@ -1,0 +1,90 @@
+// @ts-check
+
+//copy-pasted from Wuwei C.'s chenwuwei404.github.io w/ quite a few modification
+
+const urlParams = new URLSearchParams(window.location.search);
+
+const id = Number(urlParams.get("id"));
+
+var langs={
+    ['en']:'English',
+    ['zh']:'Si. Chinese'
+}
+
+function fetchErrPresent() {
+    console.log("Fetch Err");
+    const postContent = document.getElementById("postContent");
+    if(!postContent){return;}
+    postContent.innerHTML = `
+    <p>!?</p>
+    <p>You have landed in an article that is assigned but does not exist yet.</p>
+    <p>...Or did something go <span class="warning">horribly wrong?</span></p>
+    <p>(A fetch error has happened.)</p>
+    `
+}
+
+function noSuchPostPresent() {
+    window.location.replace("404.html");
+    console.log("No such post");
+}
+
+async function initPost() {
+    if (!id) { window.location.replace("articles.html"); return; }
+
+    const articleData = articlesData.find(function (article) { return article.id === id; });
+
+    if (!articleData) { noSuchPostPresent(); return; }
+
+    const {
+        title,
+        excerpt,
+        date,
+        category
+    } = articleData;
+
+    
+    console.log("Trying to fetch post file...");
+    var response;
+    try{
+        response=await fetch(`articles/${id}.md`);
+    }catch(e){
+        console.log("Error present... "+e)
+        fetchErrPresent();
+        return;
+    }
+    if(!response.ok){
+        fetchErrPresent();
+        return;
+    }
+
+    const content = (await response.text()).replaceAll('\r\n', '\n').replaceAll('\r', '\n');
+
+    const postTitle = document.getElementById("postTitle");
+    const postDate = document.getElementById("postDate");
+    const postCategories = document.getElementById("postCategories");
+    const postContent = document.getElementById("postContent");
+    
+    if (!postTitle /** || !postFavoriteToggle **/ || !postDate || !postCategories || !postContent) return;
+    
+    postTitle.textContent = title;
+    postDate.textContent = formatPublishDate(date);
+    var i = 0;
+    category.forEach(tag => {
+        if(i==0){
+            i=1;
+        }else{
+            postCategories.append(" / ");
+        }
+        postCategories.append(tag);
+        
+    });
+    
+    // @ts-ignore
+    let articleElement = marked.parse(content);
+    postContent.innerHTML = articleElement;
+    document.title = title + " - The Starry Stop";
+    var metaDescription = document.querySelector("meta[name='description']");
+    metaDescription?.setAttribute('content',excerpt);
+}
+
+document.addEventListener('DOMContentLoaded', initPost);
