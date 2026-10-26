@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.7, minimum-scale=0.7">
+    <meta name="description" content="SUBLIMINAL.">
+    <title>SURVEY_SUBLIMINAL</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="sbHide()">&lt;&lt; ◇☰</a>
+        <p>LOCAL FILES</p>
+        <a href="index.html">INDEX</a>
+        <a href="#"><strong>PROJECT OVERVIEW</strong></a>
+        <p>EXTERNAL LANDINGS</p>
+        <a href="https://creamstarlight.github.io/">THE STARRY STOP</a>
+        <a href="https://github.com/CreamStarlight">GITHUB</a>
+        <a href="https://forums.terraria.org/index.php?members/268730/">TERRARIA FORUMS</a>
+        <a href="https://xkcd.com">XKCD</a>
+    </div>
+
+
+    <div class="topbar" id="topbar">
+        <span style="cursor: pointer;" onclick="sbShow()">◇☰</span>
+        <span id="pageTitle" inert><img src="img/starrystopicon.png" height="30"/> &times; <img src="img/subliminallogo.png" height="24"></span>
+    </div>
+
+    <div class="content">
+        <h1 class="centered">IMPORTANT PLACES</h1>
+        <div class="textbox-short" id="hmt">Hometown</div>
+        <div class="pagehidden" id="hmtc">Where the Lightners live. More TBA.</div>
+        <div class="textbox-short" id="cst">Castle Town</div>
+        <div class="pagehidden" id="cstc">Where the Darkners live and where the Grand Fountain sits. More TBA.</div>
+    </div>
+    
+    <script>
+        function expansion(id){
+            console.log("event initiated, id= "+id);
+            const target=document.getElementById(id+"c");
+            if(target.style.display=="block"){
+                target.style.display="none";
+            }else{
+                target.style.display="block";
+            }
+            return;
+        }
+
+        document.getElementById('hmt').addEventListener("click",() => expansion("hmt"));
+        document.getElementById('cst').addEventListener("click",() => expansion("cst"));
+    </script>
+
+</body>
+</html>

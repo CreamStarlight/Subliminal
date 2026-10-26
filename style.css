@@ -172,6 +172,16 @@ div.content {
     height: auto;
 }
 
+div.pagehidden{
+    border: 6px solid white;
+    padding: 8px;
+    width: calc(100% - 32px);
+    height: auto;
+    overflow-y:hidden;
+    display: none;
+    transition: 0.5s;
+}
+
 .insignificant{
     font-size: 16px;
     opacity: 0.5;
@@ -205,7 +215,7 @@ div.textbox{
     color: white;
     border: 6px solid white;
     padding: 12px 24px;
-    width: min(518px, 90%);
+    width: min(518px, calc(100% - 32px));
     min-height: 116px;
     margin: 0 auto;
     line-height: 1.5;
@@ -219,7 +229,7 @@ div.textbox-transp{
     color: white;
     border: 6px solid white;
     padding: 12px 24px;
-    width: min(518px, 90%);
+    width: min(518px, calc(100% - 32px));
     min-height: 116px;
     margin: 0 auto;
     line-height: 1.5;
@@ -228,11 +238,12 @@ div.textbox-transp{
 }
 
 div.textbox-short{
+    user-select: none;
     background-color: black;
     color: white;
     border: 6px solid white;
     padding: 12px 24px;
-    width: min(518px, 90%);
+    width: min(518px, calc(100% - 32px));
     margin: 0 auto;
     line-height: 1.5;
     text-align: center;
@@ -245,7 +256,7 @@ div.cw{
     color: white;
     border: 6px solid red;
     padding: 12px 24px;
-    width: min(518px, 90%);
+    width: min(518px, calc(100% - 32px));
     min-height: 116px;
     margin: 0 auto;
 }

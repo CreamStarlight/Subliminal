@@ -6,7 +6,6 @@
     <meta name="description" content="SUBLIMINAL.">
     <title>SURVEY_SUBLIMINAL</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="js-lunarCalendar.js"></script>
     <script src="script.js" defer></script>
 </head>
 <body>
@@ -15,7 +14,9 @@
         <a href="javascript:void(0)" class="closebtn" onclick="sbHide()">&lt;&lt; ◇☰</a>
         <p>LOCAL FILES</p>
         <a href="#"><strong>INDEX</strong></a>
+        <a href="overview.html">PROJECT OVERVIEW</a>
         <p>EXTERNAL LANDINGS</p>
+        <a href="https://creamstarlight.github.io/">THE STARRY STOP</a>
         <a href="https://github.com/CreamStarlight">GITHUB</a>
         <a href="https://forums.terraria.org/index.php?members/268730/">TERRARIA FORUMS</a>
         <a href="https://xkcd.com">XKCD</a>
@@ -24,11 +25,11 @@
 
     <div class="topbar" id="topbar">
         <span style="cursor: pointer;" onclick="sbShow()">◇☰</span>
-        <span id="pageTitle"><img src="img/starrystopicon.png" height="30"/> &times; <img src="img/subliminallogo.png" height="24"></span>
+        <span id="pageTitle" inert><img src="img/starrystopicon.png" height="30"/> &times; <img src="img/subliminallogo.png" height="24"></span>
     </div>
 
     <div class="main" style="background-image: url('img/fountain.png'); background-repeat: no-repeat; background-position: center; background-size:cover;">
-        <div class="centered floater">
+        <div class="centered floater" inert>
             <img src="img/subliminalHD.png" />
             <p class="outlined">P R E L U D E</p>
         </div>
@@ -50,12 +51,20 @@
 
     <div class="main centered">
         <p>The world awaits.</p>
-        <div class="textbox-short">PROJECT OVERVIEW</div>
-        <div class="textbox-short inaccessible">WORLD OVERVIEW</div>
-        <div class="textbox-short inaccessible">IMPORTANT PLACES</div>
-        <div class="textbox-short inaccessible">SIGNIFICANT EVENTS</div>
-        <div class="textbox-short inaccessible">CHARACTERS</div>
-        <div class="textbox-short inaccessible">MIRU'S LOG</div>
+        <div class="textbox-short" id="ovv">PROJECT OVERVIEW</div>
+        <div class="textbox-short inaccessible" id="wld">WORLD OVERVIEW</div>
+        <div class="textbox-short" id="pcs">IMPORTANT PLACES</div>
+        <div class="textbox-short inaccessible" id="evt">SIGNIFICANT EVENTS</div>
+        <div class="textbox-short inaccessible" id="crc">CHARACTERS</div>
+        <div class="textbox-short inaccessible" id="mrl">MIRU'S LOG</div>
     </div>
+    <script>
+        document.getElementById('ovv').addEventListener("click", function(){
+            window.location.replace("overview.html");
+        })
+        document.getElementById('pcs').addEventListener("click", function(){
+            window.location.replace("places.html");
+        })
+    </script>
 </body>
 </html>
