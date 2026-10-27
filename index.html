@@ -7,20 +7,12 @@
     <title>SURVEY_SUBLIMINAL</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="script.js" defer></script>
+    <script src="random.js" defer></script>
 </head>
 <body>
 
     <div id="sidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="sbHide()">&lt;&lt; ◇☰</a>
-        <p>LOCAL FILES</p>
-        <a href="#"><strong>INDEX</strong></a>
-        <a href="overview.html">PROJECT OVERVIEW</a>
-        <a href="places.html">IMPORTANT PLACES</a>
-        <p>EXTERNAL LANDINGS</p>
-        <a href="https://creamstarlight.github.io/">THE STARRY STOP</a>
-        <a href="https://github.com/CreamStarlight">GITHUB</a>
-        <a href="https://forums.terraria.org/index.php?members/268730/">TERRARIA FORUMS</a>
-        <a href="https://xkcd.com">XKCD</a>
     </div>
 
 
@@ -31,8 +23,11 @@
 
     <div class="main" style="background-image: url('img/fountain.png'); background-repeat: no-repeat; background-position: center; background-size:cover;">
         <div class="centered floater" inert>
-            <img src="img/subliminalHD.png" />
+            <img src="img/subliminalHD.png" class="autoshrink" />
             <p class="outlined">P R E L U D E</p>
+            <p class="outlined" style="margin-top: 20px; margin-bottom: 0px;">Minecraft Server Opening Time</p>
+            <p style="margin-top: 0px; letter-spacing: 10px; font-size: 48px;" class="outlined" id="DESULTORYTIMER">?? : ?? : ?? : ??</p>
+            
         </div>
     </div>
 
@@ -53,7 +48,7 @@
     <div class="main centered">
         <p>The world awaits.</p>
         <div class="textbox-short" id="ovv">PROJECT OVERVIEW</div>
-        <div class="textbox-short inaccessible" id="wld">WORLD OVERVIEW</div>
+        <div class="textbox-short" id="wld">WORLD OVERVIEW</div>
         <div class="textbox-short" id="pcs">IMPORTANT PLACES</div>
         <div class="textbox-short inaccessible" id="evt">SIGNIFICANT EVENTS</div>
         <div class="textbox-short inaccessible" id="crc">CHARACTERS</div>
@@ -65,6 +60,9 @@
         })
         document.getElementById('pcs').addEventListener("click", function(){
             window.location.replace("places.html");
+        })
+        document.getElementById('wld').addEventListener("click", function(){
+            window.location.replace("worlds.html");
         })
     </script>
 </body>

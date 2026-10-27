@@ -11,4 +11,24 @@ function o(){
     return 0;
 }
 
-setInterval(o, 200);
+function f(){
+	const e=document.getElementById("DESULTORYTIMER");
+	console.log("Huh")
+	if(!e){
+		console.log("function failed to find element");
+		return 1;
+	}
+	var s="";
+	for(var i=1;i<=17;i++){
+		if(i%5==4){
+			s=s+":";
+		}else if(i%5==3 || i%5==0){
+			s=s+" "
+		}else{
+			s=s+Math.floor(Math.random()*9.99999).toString();
+		}
+	}
+	e.textContent=s;
+    return 0;
+}
+setInterval(f,200);
