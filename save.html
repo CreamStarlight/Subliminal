@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.7, minimum-scale=0.7">
+    <meta name="description" content="SAVE SELECT.">
+    <title>SUBLIMINAL_PROGRAM</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        p{
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+        body{
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="screen">
+        <p style="margin-left: 20px;" id="chapter">CHAPTER 0</p>
+        <p style="margin-left: 20px; display:none;" id="lchapter">LEGACY</p>
+
+        <div class="centered text-left" style="display: flex; flex-direction: column; height: 85vh;">
+            <div style="width: 600px;" id="menu"></div>
+            
+            <div id="curfile" style="width: 100%; display: block;">
+            <div class="textbox-transp">
+                <div style="float: left;" id="save1">
+                    <p>Miru Novae</p>
+                    <p>------------</p>
+                </div>
+                <div style="float: right;">
+                    <p>--:--</p>
+                </div>
+            </div>
+            <div class="textbox-transp">
+                <div style="float: left;" id="save2">
+                    <p>Riversi Cloudtriano</p>
+                    <p>------------</p>
+                </div>
+                <div style="float: right;">
+                    <p>--:--</p>
+                </div>
+            </div>
+            <div class="textbox-transp">
+                <div style="float: left;" id="save3">
+                    <p>[EMPTY]</p>
+                    <p>------------</p>
+                </div>
+                <div style="float: right;">
+                    <p>--:--</p>
+                </div>
+            </div>
+            </div>
+
+            <div id="legfile" style="width: 100%; display: none">
+            <div class="textbox-transp">
+                <div style="float: left;" id="lsave1">
+                    <p>Miru Novae</p>
+                    <p>Forest Sanctuary</p>
+                </div>
+                <div style="float: right;">
+                    <p>5256:19</p>
+                </div>
+            </div>
+            <div class="textbox-transp">
+                <div style="float: left;" id="lsave2">
+                    <p>[EMPTY]</p>
+                    <p>------------</p>
+                </div>
+                <div style="float: right;">
+                    <p>--:--</p>
+                </div>
+            </div>
+            <div class="textbox-transp">
+                <div style="float: left;" id="lsave3">
+                    <p>[EMPTY]</p>
+                    <p>------------</p>
+                </div>
+                <div style="float: right;">
+                    <p>--:--</p>
+                </div>
+            </div>
+            </div>
+
+            <div style="display: flex; flex-direction: row; margin-top: 20px;">
+                <div style="width: 200px;" class="inaccessible" id="copy">COPY</div>
+                <div style="width: 200px; display:none;" class="inaccessible" id="lcopy"> </div>
+                <div style="width: 200px;" class="inaccessible" id="erase">ERASE</div>
+                <div style="width: 200px;" class="inaccessible" id="cselect">CHAPTER SELECT</div>
+                <div style="width: 200px; display:none;" class="inaccessible" id="lcselect"> </div>
+            </div>
+            <div style="display: flex; flex-direction: row; margin-top: 20px;">
+                <div style="width: 200px;" id="legacy">LEGACY FILES</div>
+                <div style="width: 200px; display:none;" id="current">BACK</div>
+                <div style="width: 200px;" id="language">简体中文</div>
+                <div style="width: 200px;" class="inaccessible" id="end">END PROGRAM</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var lang=1;
+        var legacy=0;
+        var transtable=[
+            {
+                id: "chapter",
+                con: {
+                    [1]: "CHAPTER 0",
+                    [2]: "第0章"
+                }
+            },
+            {
+                id: "save1",
+                con:{
+                    [1]: "<p>Miru Novae</p><p>------------</p>",
+                    [2]: "<p>米露·新星</p><p>------------</p>"
+                }
+            },
+            {
+                id: "save2",
+                con:{
+                    [1]: "<p>Riversi Cloudriano</p><p>------------</p>",
+                    [2]: "<p>里弗西·克劳德利亚诺</p><p>------------</p>"
+                }
+            },
+            {
+                id:"save3",
+                con:{
+                    [1]: "<p>[EMPTY]</p><p>------------</p>",
+                    [2]: "<p>[空存档]</p><p>------------</p>"
+                }
+            },
+            {
+                id: "lsave1",
+                con:{
+                    [1]: "<p>Miru Novae</p><p>Forest Sanctuary</p>",
+                    [2]: "<p>米露·新星</p><p>森林圣所</p>"
+                }
+            },
+            {
+                id: "lsave2",
+                con:{
+                    [1]: "<p>[EMPTY]</p><p>------------</p>",
+                    [2]: "<p>[空存档]</p><p>------------</p>"
+                }
+            },
+            {
+                id:"lsave3",
+                con:{
+                    [1]: "<p>[EMPTY]</p><p>------------</p>",
+                    [2]: "<p>[空存档]</p><p>------------</p>"
+                }
+            },
+            {
+                id:"copy",
+                con:{
+                    [1]: "COPY",
+                    [2]: "复制"
+                }
+            },
+            {
+                id:"erase",
+                con:{
+                    [1]: "ERASE",
+                    [2]: "删除"
+                }
+            },
+            {
+                id:"cselect",
+                con:{
+                    [1]: "CHAPTER SELECT",
+                    [2]: "选择章节"
+                }
+            },
+            {
+                id: "legacy",
+                con:{
+                    [1]: "LEGACY FILES",
+                    [2]: "旧线存档"
+                }
+            },
+            {
+                id: "language",
+                con:{
+                    [1]: "简体中文",
+                    [2]: "ENGLISH"
+                }
+            },
+            {
+                id: "end",
+                con:{
+                    [1]: "END PROGRAM",
+                    [2]: "结束程序"
+                }
+            },
+            {
+                id: "menu",
+                con:{
+                    [1]: "",
+                    [2]: ""
+                }
+            },
+            {
+                id: "lchapter",
+                con:{
+                    [1]: "LEGACY",
+                    [2]: "以前的章节"
+                }
+            },
+            {
+                id: "current",
+                con:{
+                    [1]:"BACK",
+                    [2]:"返回"
+                }
+            }
+        ]
+        var legacyTable={
+            [0]:[
+                'chapter',
+                'legacy',
+                'curfile',
+                'copy',
+                'cselect'
+            ],
+            [1]:[
+                'lchapter',
+                'current',
+                'legfile',
+                'lcopy',
+                'lcselect'
+            ]
+        }
+        function changeLang(){
+            if(lang==1)lang=2;
+            else lang=1;
+            transtable.forEach(elem => {
+                document.getElementById(elem.id).innerHTML=elem.con[lang];
+            });
+        }
+        function changeLegacy(){
+            if(legacy==0){
+                legacy=1;
+                legacyTable[0].forEach(elem=>{
+                    document.getElementById(elem).style.display="none";
+                })
+                legacyTable[1].forEach(elem=>{
+                    document.getElementById(elem).style.display="block";
+                })
+            }else{
+                legacy=0;
+                legacyTable[1].forEach(elem=>{
+                    document.getElementById(elem).style.display="none";
+                })
+                legacyTable[0].forEach(elem=>{
+                    document.getElementById(elem).style.display="block";
+                })
+            }
+        }
+        document.getElementById('language').addEventListener('click',changeLang);
+        document.getElementById('legacy').addEventListener('click',changeLegacy);
+        document.getElementById('current').addEventListener('click',changeLegacy);S
+    </script>
+    
+</body>
+</html>
