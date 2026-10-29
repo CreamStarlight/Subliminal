@@ -1,56 +1,118 @@
 var sb_width="250px";
 
+var lang='en';
+
+function setData(name,value){
+	localStorage.setItem(name, value);		
+}
+function getData(name){
+	return localStorage.getItem(name);
+}
+function eraseData(name){
+	localStorage.removeItem(name);
+}
+function resetData(){
+	localStorage.clear();
+}
+
+function dataChecker(){
+	var l=getData("language");
+	if(l==null || l==""){
+		console.log("Language data not found; creating data.");
+		lang='en';
+		setData('language','en');
+	}else{
+		console.log("Language data fetched: "+l);
+		lang=l;
+	}
+}
+
 //---//---//---//---//
+
+let localization={
+	elements:[
+		{
+			en: "content",
+			zhHans: "contentCN",
+			default: "content"
+		},
+		{
+			en: "menu",
+			zhHans: "menuCN",
+			default: "menu"
+		}
+	]
+}
+
+let defaultStyle={
+	content: "block",
+	menu: "flex"
+}
 
 let sidebarTable=[
 	{
+		type: "a",
+		url: "settings.html",
+		content: "CONFIGURATION",
+		contentCN: "设置"
+	},
+	{
 		type: "p",
-		prop:'title="...Go to CreamStarlight/Subliminal for that."',
-		content: "LOCAL FILES"
+		content: "LOCAL FILES",
+		contentCN: "本地文件"
 	},
 	{
 		type: "a",
 		url: "index.html",
-		content: "INDEX"
+		content: "INDEX",
+		contentCN: "目录"
 	},
 	{
 		type: "a",
 		url: "overview.html",
-		content: "PROJECT OVERVIEW"
+		content: "PROJECT OVERVIEW",
+		contentCN: "项目总览"
 	},
 	{
 		type:"a",
 		url:"worlds.html",
-		content: "WORLD OVERVIEW"
+		content: "WORLD OVERVIEW",
+		contentCN: "世界总览"
 	},
 	{
 		type:"a",
 		url:"places.html",
-		content:"IMPORTANT PLACES"
+		content:"IMPORTANT PLACES",
+		contentCN: "重要地点"
 	},
 	{
 		type:"p",
-		content:"EXTERNAL LANDINGS"
+		content:"EXTERNAL LANDINGS",
+		contentCN: "外部网站"
 	},
 	{
 		type:"a",
 		url:"https://creamstarlight.github.io/",
-		content:"THE STARRY STOP"
+		content:"THE STARRY STOP",
+		contentCN: "星河小站"
 	},
 	{
 		type:"a",
-		url:"https://github.com/CreamStarlight",
-		content: "GITHUB"
+		url:"https://github.com/CreamStarlight/",
+		content: "GITHUB",
+		contentCN: "GitHub"
 	},
 	{
 		type:"a",
 		url:"https://forums.terraria.org/index.php?members/268730/",
-		content: "TERRARIA FORUMS"
+		content: "TERRARIA FORUMS",
+		contentCN: "泰拉瑞亚社区论坛"
 	},
 	{
 		type:"a",
 		url:"https://xkcd.com",
-		content:"XKCD"
+		content:"XKCD",
+		contentCN: "xkcd"
 	}
 ]
 
@@ -132,6 +194,12 @@ function sidebarMaker(){
 	var insertion="";
 	sidebarTable.forEach(tab => {
 		var typ=tab.type;
+		var ins;
+		if(lang=='zhHans'){
+			ins=tab.contentCN;
+		}else{
+			ins=tab.content;
+		}
 		switch(typ){
 			case "p":
 				insertion=insertion+"<p";
@@ -141,19 +209,60 @@ function sidebarMaker(){
 				if(tab.alt){
 					insertion=insertion+" title='"+tab.alt+"'"
 				}
-				insertion=insertion+">"+tab.content+"</p>";
+				insertion=insertion+">"+ins+"</p>";
 				break;
 			case "a":
 				if(window.location.href.includes(tab.url)){
-					insertion=insertion+"<a href='#'><strong>"+tab.content+"</strong></a>";
+					insertion=insertion+"<a href='#'><strong>"+ins+"</strong></a>";
 				}else{
-					insertion=insertion+"<a href='"+tab.url+"'>"+tab.content+"</a>";
+					insertion=insertion+"<a href='"+tab.url+"'>"+ins+"</a>";
 				}
 				
 				break;
 		}
 	});
 	document.getElementById('sidebar').innerHTML=document.getElementById('sidebar').innerHTML+insertion;
+}
+
+function localize(){
+	localization.elements.forEach(elem=>{
+		var sanity=document.getElementById(elem.default);
+		if(!sanity){
+			console.log(elem.default+' localization: check unsuccessful; ignored');
+			return;
+		}
+
+		var match="";
+		for(let la in elem){
+			if(la===lang){
+				match=elem[la];
+			}else{
+				if(la==='default'){
+					//does nothing
+				}else{
+					var i=document.getElementById(elem[la]);
+					if(i){
+						i.style.display='none';
+					}
+				}
+			}
+		}
+		var styled=defaultStyle[elem.default];
+		if(match==""){
+			console.log(elem.default+' localization: no target language found; resorting to default');
+			document.getElementById(elem.default).style.display=styled;
+		}else{
+			var i=document.getElementById(match);
+			if(i){
+				console.log(elem.default+' localization: localized');
+				i.style.display=styled;
+			}else{
+				console.log(elem.default+' localization: unable to reach target language; resorting to default');
+				document.getElementById(elem.default).style.display=styled;
+			}
+		}
+	});
+
 }
 
 //---//---//---//---//
@@ -164,4 +273,6 @@ if(startTime()==0){
 
 __introduction__();
 
+dataChecker();
 sidebarMaker();
+localize();

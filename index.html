@@ -22,7 +22,7 @@
     </div>
 
     <div class="main autoshrink" style="background-image: url('img/fountain.png'); background-repeat: no-repeat; background-position: center; background-size:cover;">
-        <div class="centered floater" inert>
+        <div class="centered floater" id="float" inert>
             <img src="img/subliminalHD.png" class="autoshrink" />
             <p class="outlined">P R E L U D E</p>
             <p class="outlined" style="margin-top: 20px; margin-bottom: 0px;">Minecraft Server Opening Time</p>
@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <div class="centered" style="margin-top: 200px;">
+    <div class="centered" style="margin-top: 200px;" id="prologue">
         <p>Long ago, a legend was whispered among shadows.</p>
         <p>It was a legend of HOPES and DREAMS. It was a legend of LIGHT and DARK.</p>
         <p>But before this legend would take place,</p>
@@ -45,7 +45,7 @@
 
     </div>
 
-    <div class="main centered">
+    <div class="main centered" id="menu">
         <p>The world awaits.</p>
         <div class="textbox-short" id="ovv">PROJECT OVERVIEW</div>
         <div class="textbox-short" id="wld">WORLD OVERVIEW</div>
@@ -53,6 +53,15 @@
         <div class="textbox-short inaccessible" id="evt">SIGNIFICANT EVENTS</div>
         <div class="textbox-short inaccessible" id="crc">CHARACTERS</div>
         <div class="textbox-short inaccessible" id="mrl">MIRU'S LOG</div>
+    </div>
+    <div class="main centered" id="menuCN" style="display: none;">
+        <p>这个世界正在等待着你的到来。</p>
+        <div class="textbox-short" id="ovvb">项目总览（本地化未完成）</div>
+        <div class="textbox-short" id="wldb">世界总览（本地化未完成）</div>
+        <div class="textbox-short" id="pcsb">重要地点</div>
+        <div class="textbox-short inaccessible" id="evtb">重大事件（无法访问）</div>
+        <div class="textbox-short inaccessible" id="crcb">角色（无法访问）</div>
+        <div class="textbox-short inaccessible" id="mrlb">米露的日志（无法访问）</div>
     </div>
     <script>
         document.getElementById('ovv').addEventListener("click", function(){
@@ -62,6 +71,16 @@
             window.location.replace("places.html");
         })
         document.getElementById('wld').addEventListener("click", function(){
+            window.location.replace("worlds.html");
+        })
+
+        document.getElementById('ovvb').addEventListener("click", function(){
+            window.location.replace("overview.html");
+        })
+        document.getElementById('pcsb').addEventListener("click", function(){
+            window.location.replace("places.html");
+        })
+        document.getElementById('wldb').addEventListener("click", function(){
             window.location.replace("worlds.html");
         })
     </script>

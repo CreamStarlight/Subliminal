@@ -30,6 +30,17 @@
     100% {transform: translate(0px,30px);}
 }
 
+
+progress {
+  -webkit-appearance: none;
+}
+::-webkit-progress-bar {
+  background-color: red;
+}
+::-webkit-progress-value {
+  background-color: #57D9FF;
+}
+
 body {
     background-color: #000000;
     color: white;
@@ -85,6 +96,11 @@ div.centered{
 .content{
     overflow-wrap: break-word;
     width: calc(100% - 32px);
+}
+
+.interact:hover {
+    color: #ffff00;
+    text-decoration: none;
 }
 
 a {

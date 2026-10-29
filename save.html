@@ -28,19 +28,20 @@
             <div id="curfile" style="width: 100%; display: block;">
             <div class="textbox-transp">
                 <div style="float: left;" id="save1">
-                    <p>Miru Novae</p>
+                    <p>Miru Novae - LV 1</p>
                     <p>------------</p>
                 </div>
-                <div style="float: right;">
+                <div style="float: right; text-align: right;">
                     <p>--:--</p>
+                    <p>36 / 56 <progress id="soulhealth" value="36" max="56" style="width: 100px;"></progress></p>
                 </div>
             </div>
             <div class="textbox-transp">
                 <div style="float: left;" id="save2">
-                    <p>Riversi Cloudtriano</p>
+                    <p>Riversi Cloudriano - LV 1</p>
                     <p>------------</p>
                 </div>
-                <div style="float: right;">
+                <div style="float: right; text-align: right;">
                     <p>--:--</p>
                 </div>
             </div>
@@ -49,7 +50,7 @@
                     <p>[EMPTY]</p>
                     <p>------------</p>
                 </div>
-                <div style="float: right;">
+                <div style="float: right; text-align: right;">
                     <p>--:--</p>
                 </div>
             </div>
@@ -58,11 +59,12 @@
             <div id="legfile" style="width: 100%; display: none">
             <div class="textbox-transp">
                 <div style="float: left;" id="lsave1">
-                    <p>Miru Novae</p>
+                    <p>Miru Novae - LV 20</p>
                     <p>Forest Sanctuary</p>
                 </div>
-                <div style="float: right;">
+                <div style="float: right; text-align: right;">
                     <p>5256:19</p>
+                    <p>42 / 56 <progress id="soulhealth" value="42" max="56" style="width: 100px;"></progress></p>
                 </div>
             </div>
             <div class="textbox-transp">
@@ -70,7 +72,7 @@
                     <p>[EMPTY]</p>
                     <p>------------</p>
                 </div>
-                <div style="float: right;">
+                <div style="float: right; text-align: right;">
                     <p>--:--</p>
                 </div>
             </div>
@@ -79,7 +81,7 @@
                     <p>[EMPTY]</p>
                     <p>------------</p>
                 </div>
-                <div style="float: right;">
+                <div style="float: right; text-align: right;">
                     <p>--:--</p>
                 </div>
             </div>
@@ -114,15 +116,15 @@
             {
                 id: "save1",
                 con:{
-                    [1]: "<p>Miru Novae</p><p>------------</p>",
-                    [2]: "<p>米露·新星</p><p>------------</p>"
+                    [1]: "<p>Miru Novae - LV 1</p><p>------------</p>",
+                    [2]: "<p>米露·新星 - LV 1</p><p>------------</p>"
                 }
             },
             {
                 id: "save2",
                 con:{
-                    [1]: "<p>Riversi Cloudriano</p><p>------------</p>",
-                    [2]: "<p>里弗西·克劳德利亚诺</p><p>------------</p>"
+                    [1]: "<p>Riversi Cloudriano - LV 1</p><p>------------</p>",
+                    [2]: "<p>里弗西·克劳德利亚诺 - LV 1</p><p>------------</p>"
                 }
             },
             {
@@ -135,8 +137,8 @@
             {
                 id: "lsave1",
                 con:{
-                    [1]: "<p>Miru Novae</p><p>Forest Sanctuary</p>",
-                    [2]: "<p>米露·新星</p><p>森林圣所</p>"
+                    [1]: "<p>Miru Novae - LV 20</p><p>Forest Sanctuary</p>",
+                    [2]: "<p>米露·新星 - LV 20</p><p>森林圣所</p>"
                 }
             },
             {
@@ -259,9 +261,15 @@
                 })
             }
         }
+        function closePage(){
+            window.opener=null;
+            window.open('','_self');
+            window.close();
+        }
         document.getElementById('language').addEventListener('click',changeLang);
         document.getElementById('legacy').addEventListener('click',changeLegacy);
-        document.getElementById('current').addEventListener('click',changeLegacy);S
+        document.getElementById('current').addEventListener('click',changeLegacy);
+        document.getElementById('end').addEventListener('click',closePage);
     </script>
     
 </body>

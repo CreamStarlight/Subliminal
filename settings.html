@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.7, minimum-scale=0.7">
+    <meta name="description" content="DEVICE SYSTEM CONFIGURATION.">
+    <title>DEVICE_CONFIG</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="sbHide()">&lt;&lt; ◇☰</a>
+    </div>
+
+
+    <div class="topbar" id="topbar">
+        <span style="cursor: pointer;" onclick="sbShow()">◇☰</span>
+        <span id="pageTitle" inert><img src="img/starrystopicon.png" height="30"/> &times; <img src="img/subliminallogo.png" height="24"></span>
+    </div>
+
+    <div class="content" id="content" style="user-select: none;">
+        <h1 class="centered" id="title">DEVICE SETTINGS</h1>
+        <div class="centered text-left" style="display: flex; flex-direction: column;">
+            <div style="display: flex; flex-direction: row;" class="interact">
+                <div style="width: 300px;" id="option_language">Preferred Language</div>
+                <div style="width: 200px; text-align: right;" id="value_language">English</div>
+            </div>
+            <p id="changed" style="display: none; filter: opacity(50%);">Changes will be applied after refresh.</p>
+        </div>
+    </div>
+
+    <script>
+        let transtable=[
+            {
+                id:'title',
+                con:{
+                    en:"DEVICE SETTINGS",
+                    zhHans:"设备设置"
+                }
+            },
+            {
+                id:'option_language',
+                con:{
+                    en:"Preferred Language",
+                    zhHans:"首选语言"
+                }
+            },
+            {
+                id:'value_language',
+                con:{
+                    en:"English",
+                    zhHans:"简体中文"
+                }
+            },
+            {
+                id:'changed',
+                con:{
+                    en:"Changes will be applied after refresh.",
+                    zhHans:"对设置的更改将会在刷新后生效。"
+                }
+            }
+        ]
+        var l=localStorage.getItem("language");
+        function transFlush(){
+            transtable.forEach(elem => {
+                document.getElementById(elem.id).innerHTML=elem.con[l];
+            });
+        }
+        function changeMade(){
+            document.getElementById('changed').style.display="block";
+        }
+        function changeLang(){
+            changeMade();
+            if(l=='en'){
+                l="zhHans";
+                localStorage.setItem("language","zhHans");
+            }else{
+                l="en";
+                localStorage.setItem("language","en");
+            }
+            transFlush();
+        }
+        function langValidation(){
+            if(l!='en'&&l!='zhHans'){
+                localStorage.setItem("language","en");
+                l='en';
+            }
+        }
+        document.getElementById('value_language').addEventListener('click',changeLang);
+        document.getElementById('option_language').addEventListener('click',changeLang);
+        langValidation();
+        transFlush();
+    </script>
+    
+</body>
+</html>

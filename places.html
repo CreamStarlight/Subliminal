@@ -20,15 +20,30 @@
         <span id="pageTitle" inert><img src="img/starrystopicon.png" height="30"/> &times; <img src="img/subliminallogo.png" height="24"></span>
     </div>
 
-    <div class="content">
+    <div class="content" id="content">
         <h1 class="centered">IMPORTANT PLACES</h1>
         <div class="textbox-short" id="hmt">Hometown</div>
         <div class="pagehidden" id="hmtc">Where the Lightners live. More TBA.</div>
         <div class="textbox-short" id="cst">Castle Town</div>
         <div class="pagehidden" id="cstc">Where the Darkners live and where the Grand Fountain sits. More TBA.</div>
     </div>
+
+    <div class="content" id="contentCN" style="display: none;">
+        <h1 class="centered">重要地点</h1>
+        <div class="textbox-short" id="hmt_z">Hometown</div>
+        <div class="pagehidden" id="hmt_zc">光之民们（包含人类、怪物等）的住处。待补充。</div>
+        <div class="textbox-short" id="cst_z">城堡小镇</div>
+        <div class="pagehidden" id="cst_zc">暗之民们的住处。待补充。</div>
+    </div>
     
     <script>
+        var inter=[
+            'hmt',
+            'cst',
+            'hmt_z',
+            'cst_z'
+        ]
+
         function expansion(id){
             console.log("event initiated, id= "+id);
             const target=document.getElementById(id+"c");
@@ -40,8 +55,9 @@
             return;
         }
 
-        document.getElementById('hmt').addEventListener("click",() => expansion("hmt"));
-        document.getElementById('cst').addEventListener("click",() => expansion("cst"));
+        inter.forEach(slot=>{
+            document.getElementById(slot).addEventListener("click",()=>expansion(slot));
+        })
     </script>
 
 </body>
