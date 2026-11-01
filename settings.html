@@ -32,7 +32,7 @@
     </div>
 
     <div class="content" id="content" style="user-select: none;">
-        <h1 class="centered" id="title">DEVICE SETTINGS</h1>
+        <h1 class="centered" id="title">DEVICE CONFIGURATION</h1>
         <div class="centered text-left" style="display: flex; flex-direction: column;">
             <div style="display: flex; flex-direction: row; margin: 8px 0px;" class="interact">
                 <div style="width: 300px;" id="option_language">Preferred Language</div>
@@ -43,24 +43,34 @@
                 <div style="width: 200px; text-align: right;" id="value_credits">Let's roll!</div>
             </div>
             <p id="changed" style="display: none; filter: opacity(50%);">Changes will be applied after refresh.</p>
+            <noscript>
+                <p style="display: none; filter: opacity(50%); color: red">Your browser does not support or have turned off Javascript.</p>
+                <p style="display: none; filter: opacity(50%); color: red">The website itself isn't built for no Javascript...</p>
+            </noscript>
         </div>
     </div>
 
-    <div class="main centered" style="position: absolute; top: 32px; bottom:0; left: 0; right:0; background-color: #000000d0; -ms-overflow-style: none; scrollbar-width: none; height:calc(100vh - 32px); display: none; overflow-y: scroll;" id="credits_scene">
+    <div class="centered text-left insignificant" style="position: absolute; bottom: 8px; left: 8px;">
+        Subliminal Website v0.2.1.4<br/>
+        &copy; Cream Starlight 2026<br/>
+        Subliminal &copy; unsupportedfiletype 2026
+    </div>
+
+    <div class="main centered" style="position: absolute; top: 32px; bottom:0; left: 0; right:0; background-color: #000000d0; -ms-overflow-style: none; scrollbar-width: none; -webkit-scrollbar:none; height:calc(100vh - 32px); display: none; overflow-y: scroll;" id="credits_scene">
         <div style="position: fixed; top:48px; left:8px;" id="goBack" class="interact">&lt;&lt; Go back</div>
         <p style="padding-top: 128px;">Subliminal</p>
         <br/>
-        <p class="grayout">- Directed by -</p>
+        <p class="grayout">- Project Direction -</p>
         <p>unsupportedfiletype</p>
         <br/>
-        <p class="grayout">- Mod making -</p>
+        <p class="grayout">- Mod Development -</p>
         <p>unsupportedfiletype <span class="grayout">for</span> Subliminal Mod</p>
         <p>Pixelcite <span class="grayout">for</span> Soulbound Mod</p>
         <br/>
-        <p class="grayout">- Representatives -</p>
+        <p class="grayout">- Community Representatives -</p>
         <p>Ashley, Lady of Dairy</p>
         <p>Brightly "brightlyburn"</p>
-        <p>C. Boy</p>
+        <p>C. Boy <span class="grayout">a.k.a.</span> Will</p>
         <p>Eggy Toasty</p>
         <p>Gooose</p>
         <p>Kirbonic</p>
@@ -70,12 +80,13 @@
         <p>Septagorkey</p>
         <p>Skeleton5572</p>
         <br/>
-        <p class="grayout">- Website managing -</p>
+        <p class="grayout">- Unofficial Website Development &amp; Maintenance -</p>
         <p><span class="grayout">Programmer</span> Cream Starlight</p>
+        <p><span class="grayout">Artistic assets</span> Cream Starlight</p>
         <p><span class="grayout">Chinese translation help</span> Riversi "IntoTheWearyBlue" Cloudriano</p>
         <p><span class="grayout">Platform provider</span> GitHub Pages</p>
         <br/>
-        <p class="grayout">- Participants -</p>
+        <p class="grayout">- Contributors -</p>
         <p>sk6608</p>
         <p>Wiktor01978</p>
         <p>RouxlsKaardVOs</p>
@@ -159,8 +170,10 @@
         <p>atterny</p>
         <p>just_a_.moth</p>
         <br/>
-        <p class="grayout">- Special thanks -</p>
+        <p class="grayout">- Special Thanks -</p>
         <p>Riversi "IntoTheWearyBlue" Cloudriano <span class="grayout">a.k.a.</span> NeveSlush</p>
+        <p>C. Boy <span class="grayout">a.k.a.</span> Will</p>
+        <p>DragonMals</p>
         <p>Wuwei Chen</p>
         <p>Fuzhou University</p>
         <p>Runoob.com</p>
@@ -180,13 +193,14 @@
         <p>the process shall still be holding a meaning, right?</p>
         <p style="padding-bottom: 128px;"> </p>
     </div>
+    
 
     <script>
         let transtable=[
             {
                 id:'title',
                 con:{
-                    en:"DEVICE SETTINGS",
+                    en:"DEVICE CONFIGURATION",
                     zhHans:"设备设置"
                 }
             },
@@ -255,6 +269,8 @@
         }
         function creditsShow(){
             document.getElementById("credits_scene").style.display="block";
+            document.getElementById("credits_scene").scrollTop = 300;
+            document.getElementById("credits_scene").scrollTo({top:0, behavior:"smooth"})
         }
         function creditsHide(){
             document.getElementById("credits_scene").style.display="none";
