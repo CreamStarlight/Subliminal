@@ -40,6 +40,11 @@ let localization={
 			en: "menu",
 			zhHans: "menuCN",
 			default: "menu"
+		},
+		{
+			en: "prologue",
+			zhHans: "prologueCN",
+			default: "prologue"
 		}
 	]
 }
@@ -247,7 +252,7 @@ function localize(){
 				}
 			}
 		}
-		var styled=defaultStyle[elem.default];
+		var styled=defaultStyle[elem.default] || "block";
 		if(match==""){
 			console.log(elem.default+' localization: no target language found; resorting to default');
 			document.getElementById(elem.default).style.display=styled;
