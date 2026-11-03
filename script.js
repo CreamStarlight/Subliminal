@@ -1,7 +1,5 @@
 var sb_width="250px";
 
-var lang='en';
-
 function setData(name,value){
 	localStorage.setItem(name, value);		
 }
@@ -14,6 +12,9 @@ function eraseData(name){
 function resetData(){
 	localStorage.clear();
 }
+function isNumeric(value) {
+    return !isNaN(parseFloat(value)) && isFinite(value);
+}
 
 function dataChecker(){
 	var l=getData("language");
@@ -25,6 +26,36 @@ function dataChecker(){
 		console.log("Language data fetched: "+l);
 		lang=l;
 	}
+}
+
+var optionTable={
+    language:'en',
+    naughtiness:false,
+    animReduce:false,
+    fallback:false
+}
+
+function getSettings(){
+    for (setting in optionTable) {
+        const v=localStorage.getItem(setting);
+        if(v=="" || v==null){
+            localStorage.setItem(setting, optionTable[setting]);
+            continue;
+        }
+        if(v=="false"){
+            optionTable[setting]=false;
+            continue;
+        }
+        if(v=="true"){
+            optionTable[setting]=true;
+            continue;
+        }
+        if(isNumeric(v)){
+            optionTable[setting]=Number(v);
+			continue;
+        }
+        optionTable[setting]=v;
+    }
 }
 
 //---//---//---//---//
@@ -45,7 +76,17 @@ let localization={
 			en: "prologue",
 			zhHans: "prologueCN",
 			default: "prologue"
-		}
+		},
+		{
+			en:"sign",
+			zhHans:"signCN",
+			default:"sign"
+		},
+		{
+			en:"sign2",
+			zhHans:"signCN2",
+			default:"sign2"
+		},
 	]
 }
 
@@ -121,23 +162,6 @@ let sidebarTable=[
 	}
 ]
 
-/*
-
-    <div id="sidebar" class="sidebar">
-        <a href="javascript:void(0)" class="closebtn" onclick="sbHide()">&lt;&lt; ◇☰</a>
-        <p>LOCAL FILES</p>
-        <a href="#"><strong>INDEX</strong></a>
-        <a href="overview.html">PROJECT OVERVIEW</a>
-        <a href="places.html">IMPORTANT PLACES</a>
-        <p>EXTERNAL LANDINGS</p>
-        <a href="https://creamstarlight.github.io/">THE STARRY STOP</a>
-        <a href="https://github.com/CreamStarlight">GITHUB</a>
-        <a href="https://forums.terraria.org/index.php?members/268730/">TERRARIA FORUMS</a>
-        <a href="https://xkcd.com">XKCD</a>
-    </div>
-
-*/
-
 function __introduction__(){
 	return;
 }
@@ -196,6 +220,7 @@ function checkTime(i){
 }
 
 function sidebarMaker(){
+	var lang=optionTable.language;
 	var insertion="";
 	sidebarTable.forEach(tab => {
 		var typ=tab.type;
@@ -230,6 +255,7 @@ function sidebarMaker(){
 }
 
 function localize(){
+	var lang=optionTable.language;
 	localization.elements.forEach(elem=>{
 		var sanity=document.getElementById(elem.default);
 		if(!sanity){
@@ -278,6 +304,7 @@ if(startTime()==0){
 
 __introduction__();
 
+getSettings();
 dataChecker();
 sidebarMaker();
 localize();

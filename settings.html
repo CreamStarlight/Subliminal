@@ -39,6 +39,14 @@
                 <div style="width: 200px; text-align: right;" id="value_language">English</div>
             </div>
             <div style="display: flex; flex-direction: row; margin: 8px 0px;" class="interact">
+                <div style="width: 300px;" id="option_animreduce">Reduced Animation</div>
+                <div style="width: 200px; text-align: right;" id="value_animreduce">Off</div>
+            </div>
+            <div style="display: flex; flex-direction: row; margin: 8px 0px;" class="inaccessible">
+                <div style="width: 300px;" id="option_naughtiness">Informality</div>
+                <div style="width: 200px; text-align: right;" id="value_naughtiness">Off</div>
+            </div>
+            <div style="display: flex; flex-direction: row; margin: 8px 0px;" class="interact">
                 <div style="width: 300px;" id="option_credits">Credits</div>
                 <div style="width: 200px; text-align: right;" id="value_credits">Let's roll!</div>
             </div>
@@ -46,13 +54,15 @@
             <noscript>
                 <p style="display: none; filter: opacity(50%); color: red">Your browser does not support or have turned off Javascript.</p>
                 <p style="display: none; filter: opacity(50%); color: red">The website itself isn't built for no Javascript...</p>
+                
             </noscript>
         </div>
     </div>
     
     <div class="centered text-left insignificant" style="position: absolute; bottom: 8px; left: 8px;">
-        Subliminal Website v0.2.1.5-dev<br/>
+        Subliminal Website v0.2.2.0<br/>
         &copy; Cream Starlight 2026<br/>
+        Chn i18n &copy; Cream & Riversi 2026<br/>
         Subliminal &copy; unsupportedfiletype 2026
     </div>
 
@@ -170,6 +180,14 @@
         <p>atterny</p>
         <p>just_a_.moth</p>
         <p>Fyre "flaymincauck"</p>
+        <p>Mr. Bane</p>
+        <p>theshark1880</p>
+        <p>_daweirdo_</p>
+        <p>not_darkert</p>
+        <p>Serpentine 2.0</p>
+        <p>Noggy "eggnog_sunz."</p>
+        <p>afro2204</p>
+        <p>tissles</p>
         <br/>
         <p class="grayout">- Special Thanks -</p>
         <p>Riversi "IntoTheWearyBlue" Cloudriano <span class="grayout">a.k.a.</span> NeveSlush</p>
@@ -183,7 +201,7 @@
         <p>Microsoft Visual Studio Code</p>
         <p>And <strong>YOU</strong>, yes, <strong>YOU</strong></p>
         <br/><br/><br/>
-        <p>"Really, I love working on this. I know it's been some time since I<br/>last did things that is this big, but I suppose that motivation<br/>can get you anywhere and everywhere."</p>
+        <p>"Really, I love working on this. I know it's been some time since I last did things that is this big, but I suppose that motivation can get you anywhere and everywhere."</p>
         <p>— Cream Starlight<span class="grayout">, programmer of the Subliminal website</span></p>
         <br/><br/><br/>
         <p>It's hilarious the credits lie here before the story even starts.</p>
@@ -197,6 +215,15 @@
     
 
     <script>
+        function isNumeric(value) {
+            return !isNaN(parseFloat(value)) && isFinite(value);
+        }
+        var optionTable={
+            language:'en',
+            naughtiness:false,
+            animReduce:false,
+            fallback:false
+        }
         let transtable=[
             {
                 id:'title',
@@ -208,29 +235,29 @@
             {
                 id:'option_language',
                 con:{
-                    en:"Preferred Language",
-                    zhHans:"首选语言"
+                    en:"<img src='img/icon/language.png' width='24'/>Preferred Language",
+                    zhHans:"<img src='img/icon/language.png' width='24'/>首选语言"
                 }
             },
             {
                 id:'value_language',
                 con:{
-                    en:"English",
-                    zhHans:"简体中文"
+                    en:"<img src='img/icon/en-us.png' width='26'/>English",
+                    zhHans:"<img src='img/icon/zh-cn.png' width='26'/>简体中文"
                 }
             },
             {
                 id:'changed',
                 con:{
-                    en:"Changes will be applied after refresh.",
-                    zhHans:"对设置的更改将会在刷新后生效。"
+                    en:"<img src='img/icon/warning.png' width='24'/>Changes will be applied after refresh.",
+                    zhHans:"<img src='img/icon/warning.png' width='24'/>对设置的更改将会在刷新后生效。"
                 }
             },
             {
                 id:'option_credits',
                 con:{
-                    en:"Credits",
-                    zhHans:"鸣谢名单"
+                    en:"<img src='img/icon/heart.png' width='24'/>Credits",
+                    zhHans:"<img src='img/icon/heart.png' width='24'/>鸣谢名单"
                 }
             },
             {
@@ -246,18 +273,95 @@
                     en:"&lt;&lt; Go back",
                     zhHans:"&lt;&lt; 返回"
                 }
+            },
+            {
+                id:'option_animreduce',
+                con:{
+                    en:"<img src='img/icon/animreduce.png' width='24'/>Reduced Animation",
+                    zhHans:"<img src='img/icon/animreduce.png' width='24'/>动画简化"
+                }
+            },
+            {
+                id:'option_naughtiness',
+                con:{
+                    en:"<img src='img/icon/informality.png' width='24'/>Informality",
+                    zhHans:"<img src='img/icon/informality.png' width='24'/>非正式内容"
+                }
             }
         ]
-        var l=localStorage.getItem("language");
+        let unified_value={
+            apply_on:[
+                {
+                    id:'value_animreduce',
+                    style:1,
+                    checkVal:"animReduce"
+                },
+                {
+                    id:'value_naughtiness',
+                    style:1,
+
+                    checkVal:"naughtiness"
+                }
+            ],
+            translation:{
+                [1]:{
+                    en:{
+                        [true]:"On",
+                        [false]:"Off"
+                    },
+                    zhHans:{
+                        [true]:"开",
+                        [false]:"关"
+                    }
+                },
+                [2]:{
+                    en:{
+                        [true]:"Enabled",
+                        [false]:"Disabled"
+                    },
+                    zhHans:{
+                        [true]:"启用",
+                        [false]:"禁用"
+                    }
+                }
+            }
+        }
+        function getSettings(){
+            for (setting in optionTable) {
+                const v=localStorage.getItem(setting);
+                if(v=="" || v==null){
+                    localStorage.setItem(setting, optionTable[setting]);
+                    continue;
+                }
+                if(v=="false"){
+                    optionTable[setting]=false;
+                    continue;
+                }
+                if(v=="true"){
+                    optionTable[setting]=true;
+                    continue;
+                }
+                if(isNumeric(v)){
+                    optionTable[setting]=Number(v);
+                    continue;
+                }
+                optionTable[setting]=v;
+            }
+        }
+        optionTable.language=localStorage.getItem("language");
         function transFlush(){
             transtable.forEach(elem => {
-                document.getElementById(elem.id).innerHTML=elem.con[l];
+                document.getElementById(elem.id).innerHTML=elem.con[optionTable.language];
             });
+            unified_value.apply_on.forEach(elem =>{
+                document.getElementById(elem.id).innerHTML=unified_value.translation[elem.style][optionTable.language][optionTable[elem.checkVal]]
+            })
         }
         function changeMade(){
             document.getElementById('changed').style.display="block";
         }
         function changeLang(){
+            l=optionTable.language;
             changeMade();
             if(l=='en'){
                 l="zhHans";
@@ -266,27 +370,43 @@
                 l="en";
                 localStorage.setItem("language","en");
             }
+            optionTable.language=l;
             transFlush();
         }
         function creditsShow(){
             document.getElementById("credits_scene").style.display="block";
-            document.getElementById("credits_scene").scrollTop = 300;
-            document.getElementById("credits_scene").scrollTo({top:0, behavior:"smooth"})
+            if (optionTable.animReduce) {
+                document.getElementById("credits_scene").scrollTop = 0;
+            }else{
+                document.getElementById("credits_scene").scrollTop = 300;
+                document.getElementById("credits_scene").scrollTo({top:0, behavior:"smooth"});
+            }
         }
         function creditsHide(){
             document.getElementById("credits_scene").style.display="none";
         }
+        function changeAnim(){
+            optionTable.animReduce=!optionTable.animReduce;
+            localStorage.setItem("animReduce",optionTable.animReduce);
+            changeMade();
+            transFlush();
+        }
         function langValidation(){
+            l=optionTable.language;
             if(l!='en'&&l!='zhHans'){
                 localStorage.setItem("language","en");
                 l='en';
             }
+            optionTable.language=l;
         }
+        getSettings();
         document.getElementById('value_language').addEventListener('click',changeLang);
         document.getElementById('option_language').addEventListener('click',changeLang);
         document.getElementById('value_credits').addEventListener('click',creditsShow);
         document.getElementById('option_credits').addEventListener('click',creditsShow);
         document.getElementById('goBack').addEventListener('click',creditsHide);
+        document.getElementById('value_animreduce').addEventListener('click',changeAnim);
+        document.getElementById('option_animreduce').addEventListener('click',changeAnim);
         langValidation();
         transFlush();
     </script>
