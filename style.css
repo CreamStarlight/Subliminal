@@ -30,17 +30,6 @@
     100% {transform: translate(0px,30px);}
 }
 
-
-progress {
-  -webkit-appearance: none;
-}
-::-webkit-progress-bar {
-  background-color: red;
-}
-::-webkit-progress-value {
-  background-color: #57D9FF;
-}
-
 body {
     background-color: #000000;
     color: white;
@@ -223,6 +212,10 @@ div.pagehidden{
 }
 
 .inaccessible{
+    filter: brightness(50%);
+}
+
+.inaccessible-b{
     filter: brightness(50%) grayscale(100%);
 }
 

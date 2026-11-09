@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.7, minimum-scale=0.7">
+    <meta name="description" content="A PLACE SHATTERED ACROSS TIME AND SPACE.">
+    <title>404_NOT_FOUND</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="sbHide()">&lt;&lt; ◇☰</a>
+    </div>
+
+
+    <div class="topbar" id="topbar">
+        <span style="cursor: pointer;" onclick="sbShow()">◇☰</span>
+        <span id="pageTitle" inert><img src="img/starrystopicon.png" height="30"/> &times; <img src="img/subliminallogo.png" height="24"></span>
+    </div>
+
+    <div class="main centered" id="menu">
+        <img src="img/forgotten_tree.gif" id="forgotten"/>
+        <p>There is nothing.</p>
+        <p>Except for the tree and the man.</p>
+    </div>
+    <div class="main centered" id="menuCN" style="display: none;">
+        <img src="img/forgotten_tree.gif"/>
+        <p>这里什么也没有。</p>
+        <p>那棵树，和树下的人，除外。</p>
+    </div>
+    <script>
+        function noTree(){
+            document.getElementById('menu').innerHTML='<p>There is nothing.</p>';
+            document.getElementById('menuCN').innerHTML='<p>这里什么也没有。</p>';
+        }
+        function getEgg(){
+            localStorage.setItem('egg',1);
+            noTree();
+            const c=document.getElementById('menu');
+            const cc=document.getElementById('menuCN');
+            var yourname=localStorage.getItem('name');
+            if(yourname=='' || yourname==null){
+                c.innerHTML=c.innerHTML+'<p>You got the Egg.</p>'
+                cc.innerHTML=cc.innerHTML+'<p>你得到了蛋。</p>'
+            }else{
+                c.innerHTML=c.innerHTML+'<p>'+yourname+' got the Egg.</p>'
+                cc.innerHTML=cc.innerHTML+'<p>'+yourname+'得到了蛋。</p>'
+            }
+            
+        }
+        if(Number(localStorage.getItem('egg'))>0){
+            noTree();
+        }else{
+            document.getElementById('forgotten').addEventListener('click',getEgg);
+        }
+    </script>
+</body>
+</html>

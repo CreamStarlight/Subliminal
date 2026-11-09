@@ -99,8 +99,8 @@ let sidebarTable=[
 	{
 		type: "a",
 		url: "settings.html",
-		content: "CONFIGURATION",
-		contentCN: "设置"
+		content: "<img src='img/icon/config.png' width='24'/> CONFIGURATION",
+		contentCN: "<img src='img/icon/config.png' width='24'/> 设置"
 	},
 	{
 		type: "p",

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.7, minimum-scale=0.7">
+    <meta name="description" content="LOCALLY STORED DATA.">
+    <title>DEVICE_DATA</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js" defer></script>
+    <style>
+        p{
+            margin: 8px 0px;
+        }
+        .main p{
+            text-shadow: 0px 1.5px black, 1.5px 1.5px black, 1.5px 0px black, 1.5px -1.5px black, 0px -1.5px black, -1.5px -1.5px black, -1.5px 0px black, -1.5px 1.5px black;
+        }
+        .grayout{
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="sbHide()">&lt;&lt; ◇☰</a>
+    </div>
+
+
+    <div class="topbar" id="topbar">
+        <span style="cursor: pointer;" onclick="sbShow()">◇☰</span>
+        <span id="pageTitle" inert><img src="img/starrystopicon.png" height="30"/> &times; <img src="img/subliminallogo.png" height="24"></span>
+    </div>
+
+    <div class="content" id="content" style="user-select: none;">
+        <h1 class="centered" id="title">STATISTICS</h1>
+        <div class="centered text-left" style="display: flex; flex-direction: column;">
+            <div style="display: flex; flex-direction: row; margin: 8px 0px;">
+                <div style="width: 200px;" id="stat_name">You're known as</div>
+                <div style="width: 300px; text-align: right;" id="value_name"></div>
+                <input style="display:none; width:300px; border:none; background: none; color:white; font-family: 'DeterminationSans'; font-size:24px; text-align: right;" type="text" id="input_name" placeholder="Tell us your name?"/>
+            </div>
+            <div style="display: flex; flex-direction: row; margin: 8px 0px;">
+                <div style="width: 200px;" id="stat_egg">Eggs</div>
+                <div style="width: 300px; text-align: right;" id="value_egg">0</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        var statTable={
+            egg:{
+                type:'int',
+                val: 0,
+                def: 0
+            },
+            name:{
+                type:'str',
+                val: "",
+                def: "<span style='filter: opacity(50%);'>what is your name anyway?</span>"
+            }
+        }
+        function getStat(){
+            for (let stat in statTable){
+                const v=localStorage.getItem(stat);
+                const typ=statTable[stat].type;
+                if(typ=="int"){
+                    if(v==""||v==null){
+                        statTable[stat].val=statTable[stat].def;
+                    }else{
+                        statTable[stat].val=Math.floor(Number(v));
+                    }
+                }else if(typ=="num"){
+                    if(v==""||v==null){
+                        statTable[stat].val=statTable[stat].def;
+                    }else{
+                        statTable[stat].val=Number(v);
+                    }
+                }else if(typ=="bool"){
+                    if(v=="true"||v=="false"){
+                        if(v=="true"){
+                            statTable[stat].val=true;
+                        }else{
+                            statTable[stat].val=false;
+                        }
+                    }else{
+                        statTable[stat].val=statTable[stat].def;
+                    }
+                }else if(typ=="str"){
+                    if(v==""||v==null){
+                        statTable[stat].val=statTable[stat].def;
+                        
+                    }else{
+                        statTable[stat].val=v;
+                    }
+                }
+            }
+        }
+        function updateStat(){
+            for(let stat in statTable){
+                document.getElementById('value_'+stat).innerHTML=statTable[stat].val;
+            }
+        }
+        function startInput(){
+            if(statTable.name.val!=statTable.name.def){
+                document.getElementById("input_name").value=statTable.name.val;
+            }
+            document.getElementById("value_name").style.display="none";
+            document.getElementById("input_name").style.display="block";
+        }
+        function endInput(){
+            let v=document.getElementById('input_name').value;
+            localStorage.setItem('name',v);
+            document.getElementById("value_name").style.display="block";
+            document.getElementById("input_name").style.display="none";
+            statTable.name.val=v;
+            updateStat();
+        }
+        document.getElementById("value_name").addEventListener("click",startInput);
+        document.getElementById("input_name").addEventListener("keydown", function(event) {
+            if (event.key == "Enter") {
+                endInput();
+            }
+        });
+        getStat();
+        updateStat();
+    </script>
+    
+</body>
+</html>

@@ -50,7 +50,12 @@
                 <div style="width: 300px;" id="option_credits">Credits</div>
                 <div style="width: 200px; text-align: right;" id="value_credits">Let's roll!</div>
             </div>
+            <div style="display: flex; flex-direction: row; margin: 8px 0px;" class="interact">
+                <div style="width: 300px;" id="option_reset">Reset Configuration</div>
+                <div style="width: 200px; text-align: right;" id="value_reset"> </div>
+            </div>
             <p id="changed" style="display: none; filter: opacity(50%);">Changes will be applied after refresh.</p>
+            <p id="erased" style="display: none; filter: opacity(50%); color: red">Config reset.</p>
             <noscript>
                 <p style="display: none; filter: opacity(50%); color: red">Your browser does not support or have turned off Javascript.</p>
                 <p style="display: none; filter: opacity(50%); color: red">The website itself isn't built for no Javascript...</p>
@@ -60,7 +65,7 @@
     </div>
     
     <div class="centered text-left insignificant" style="position: absolute; bottom: 8px; left: 8px;">
-        Subliminal Website v0.2.2.0<br/>
+        Subliminal Website v0.2.2.1-dev<br/>
         &copy; Cream Starlight 2026<br/>
         Chn i18n &copy; Cream & Riversi 2026<br/>
         Subliminal &copy; unsupportedfiletype 2026
@@ -90,7 +95,7 @@
         <p>Septagorkey</p>
         <p>Skeleton5572</p>
         <br/>
-        <p class="grayout">- Unofficial Website Development &amp; Maintenance -</p>
+        <p class="grayout">- Community Website -</p>
         <p><span class="grayout">Programmer</span> Cream Starlight</p>
         <p><span class="grayout">Artistic assets</span> Cream Starlight</p>
         <p><span class="grayout">Chinese translation help</span> Riversi "IntoTheWearyBlue" Cloudriano</p>
@@ -188,6 +193,14 @@
         <p>Noggy "eggnog_sunz."</p>
         <p>afro2204</p>
         <p>tissles</p>
+        <p>Mr. Walker "funnichrisman"</p>
+        <p>Florian the Cat</p>
+        <p>lure.e</p>
+        <p>DrawBucket</p>
+        <p>been_seen</p>
+        <p>epicandcodefr</p>
+        <p>TheMooster86</p>
+        <p>Trip "triplebomb"</p>
         <br/>
         <p class="grayout">- Special Thanks -</p>
         <p>Riversi "IntoTheWearyBlue" Cloudriano <span class="grayout">a.k.a.</span> NeveSlush</p>
@@ -215,11 +228,17 @@
     
 
     <script>
+        var f;
         function isNumeric(value) {
             return !isNaN(parseFloat(value)) && isFinite(value);
         }
         var optionTable={
             language:'en',
+            naughtiness:false,
+            animReduce:false,
+            fallback:false
+        }
+        const defaultSettings={
             naughtiness:false,
             animReduce:false,
             fallback:false
@@ -235,29 +254,29 @@
             {
                 id:'option_language',
                 con:{
-                    en:"<img src='img/icon/language.png' width='24'/>Preferred Language",
-                    zhHans:"<img src='img/icon/language.png' width='24'/>首选语言"
+                    en:"<img src='img/icon/language.png' width='24'/> Preferred Language",
+                    zhHans:"<img src='img/icon/language.png' width='24'/> 首选语言"
                 }
             },
             {
                 id:'value_language',
                 con:{
-                    en:"<img src='img/icon/en-us.png' width='26'/>English",
-                    zhHans:"<img src='img/icon/zh-cn.png' width='26'/>简体中文"
+                    en:"<img src='img/icon/en-us.png' width='26'/> English",
+                    zhHans:"<img src='img/icon/zh-cn.png' width='26'/> 简体中文"
                 }
             },
             {
                 id:'changed',
                 con:{
-                    en:"<img src='img/icon/warning.png' width='24'/>Changes will be applied after refresh.",
-                    zhHans:"<img src='img/icon/warning.png' width='24'/>对设置的更改将会在刷新后生效。"
+                    en:"<img src='img/icon/warning.png' width='24'/> Changes will be applied after refresh.",
+                    zhHans:"<img src='img/icon/warning.png' width='24'/> 对设置的更改将会在刷新后生效。"
                 }
             },
             {
                 id:'option_credits',
                 con:{
-                    en:"<img src='img/icon/heart.png' width='24'/>Credits",
-                    zhHans:"<img src='img/icon/heart.png' width='24'/>鸣谢名单"
+                    en:"<img src='img/icon/heart.png' width='24'/> Credits",
+                    zhHans:"<img src='img/icon/heart.png' width='24'/> 鸣谢名单"
                 }
             },
             {
@@ -277,15 +296,29 @@
             {
                 id:'option_animreduce',
                 con:{
-                    en:"<img src='img/icon/animreduce.png' width='24'/>Reduced Animation",
-                    zhHans:"<img src='img/icon/animreduce.png' width='24'/>动画简化"
+                    en:"<img src='img/icon/animreduce.png' width='24'/> Reduced Animation",
+                    zhHans:"<img src='img/icon/animreduce.png' width='24'/> 动画简化"
                 }
             },
             {
                 id:'option_naughtiness',
                 con:{
-                    en:"<img src='img/icon/informality.png' width='24'/>Informality",
-                    zhHans:"<img src='img/icon/informality.png' width='24'/>非正式内容"
+                    en:"<img src='img/icon/informality.png' width='24'/> Informality",
+                    zhHans:"<img src='img/icon/informality.png' width='24'/> 非正式内容"
+                }
+            },
+            {
+                id:'option_reset',
+                con:{
+                    en: "<img src='img/icon/bomb.png' width='24'/> Reset Configuration",
+                    zhHans: "<img src='img/icon/bomb.png' width='24'/> 重置设置"
+                }
+            },
+            {
+                id:'erased',
+                con:{
+                    en: "<img src='img/icon/redx.png' width='24'/> Config reset.",
+                    zhHans: "<img src='img/icon/redx.png' width='24'/> 设置已重置。"
                 }
             }
         ]
@@ -327,7 +360,7 @@
             }
         }
         function getSettings(){
-            for (setting in optionTable) {
+            for (let setting in optionTable) {
                 const v=localStorage.getItem(setting);
                 if(v=="" || v==null){
                     localStorage.setItem(setting, optionTable[setting]);
@@ -358,6 +391,7 @@
             })
         }
         function changeMade(){
+            document.getElementById('erased').style.display="none";
             document.getElementById('changed').style.display="block";
         }
         function changeLang(){
@@ -399,6 +433,16 @@
             }
             optionTable.language=l;
         }
+        function nukeit(){
+            for(setting in defaultSettings){
+                optionTable[setting]=defaultSettings[setting];
+                localStorage.setItem(setting, defaultSettings[setting]);
+            }
+            document.getElementById('changed').style.display="none";
+            document.getElementById('erased').style.display="block";
+            transFlush();
+            
+        }
         getSettings();
         document.getElementById('value_language').addEventListener('click',changeLang);
         document.getElementById('option_language').addEventListener('click',changeLang);
@@ -407,6 +451,8 @@
         document.getElementById('goBack').addEventListener('click',creditsHide);
         document.getElementById('value_animreduce').addEventListener('click',changeAnim);
         document.getElementById('option_animreduce').addEventListener('click',changeAnim);
+        document.getElementById('value_reset').addEventListener('click',nukeit);
+        document.getElementById('option_reset').addEventListener('click',nukeit);
         langValidation();
         transFlush();
     </script>
