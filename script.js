@@ -32,13 +32,14 @@ var optionTable={
     language:'en',
     naughtiness:false,
     animReduce:false,
-    fallback:false
+    fallback:false,
+	titleLang:false
 }
 
 function getSettings(){
     for (setting in optionTable) {
         const v=localStorage.getItem(setting);
-        if(v=="" || v==null){
+        if(v=="" || v==null||v==undefined){
             localStorage.setItem(setting, optionTable[setting]);
             continue;
         }
@@ -87,12 +88,18 @@ let localization={
 			zhHans:"signCN2",
 			default:"sign2"
 		},
+		{
+			en:"logoEN",
+			zhHans:"logoCN",
+			default:"logoEN"
+		}
 	]
 }
 
 let defaultStyle={
 	content: "block",
-	menu: "flex"
+	menu: "flex",
+	logoEN: "inline-block"
 }
 
 let sidebarTable=[
@@ -101,6 +108,12 @@ let sidebarTable=[
 		url: "settings.html",
 		content: "<img src='img/icon/config.png' width='24'/> CONFIGURATION",
 		contentCN: "<img src='img/icon/config.png' width='24'/> 设置"
+	},
+	{
+		type: "a",
+		url: "stat.html",
+		content: "STATISTICS",
+		contentCN: "数据"
 	},
 	{
 		type: "p",
@@ -257,6 +270,9 @@ function sidebarMaker(){
 function localize(){
 	var lang=optionTable.language;
 	localization.elements.forEach(elem=>{
+		if(elem.default=="logoEN"&&optionTable.titleLang){
+			return;
+		}
 		var sanity=document.getElementById(elem.default);
 		if(!sanity){
 			console.log(elem.default+' localization: check unsuccessful; ignored');

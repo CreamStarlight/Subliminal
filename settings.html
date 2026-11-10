@@ -28,7 +28,7 @@
 
     <div class="topbar" id="topbar">
         <span style="cursor: pointer;" onclick="sbShow()">◇☰</span>
-        <span id="pageTitle" inert><img src="img/starrystopicon.png" height="30"/> &times; <img src="img/subliminallogo.png" height="24"></span>
+        <span id="pageTitle" inert><img src="img/starrystopicon.png" height="30"/> &times; <img id="logoEN" src="img/subliminallogo.png" height="24"><img id="logoCN" src="img/subliminalCHlogo.png" height="24" style="display: none;"></span>
     </div>
 
     <div class="content" id="content" style="user-select: none;">
@@ -41,6 +41,10 @@
             <div style="display: flex; flex-direction: row; margin: 8px 0px;" class="interact">
                 <div style="width: 300px;" id="option_animreduce">Reduced Animation</div>
                 <div style="width: 200px; text-align: right;" id="value_animreduce">Off</div>
+            </div>
+            <div style="display: flex; flex-direction: row; margin: 8px 0px;" class="interact">
+                <div style="width: 300px;" id="option_titlelang">Title Language</div>
+                <div style="width: 200px; text-align: right;" id="value_titlelang">Follows overall setting</div>
             </div>
             <div style="display: flex; flex-direction: row; margin: 8px 0px;" class="inaccessible">
                 <div style="width: 300px;" id="option_naughtiness">Informality</div>
@@ -65,7 +69,7 @@
     </div>
     
     <div class="centered text-left insignificant" style="position: absolute; bottom: 8px; left: 8px;">
-        Subliminal Website v0.2.2.1-dev<br/>
+        Subliminal Website v0.2.4.0<br/>
         &copy; Cream Starlight 2026<br/>
         Chn i18n &copy; Cream & Riversi 2026<br/>
         Subliminal &copy; unsupportedfiletype 2026
@@ -236,12 +240,14 @@
             language:'en',
             naughtiness:false,
             animReduce:false,
-            fallback:false
+            fallback:false,
+            titleLang:false
         }
         const defaultSettings={
             naughtiness:false,
             animReduce:false,
-            fallback:false
+            fallback:false,
+            titleLang:false
         }
         let transtable=[
             {
@@ -320,6 +326,13 @@
                     en: "<img src='img/icon/redx.png' width='24'/> Config reset.",
                     zhHans: "<img src='img/icon/redx.png' width='24'/> 设置已重置。"
                 }
+            },
+            {
+                id:'option_titlelang',
+                con:{
+                    en: "<img src='img/icon/titlelang.png' width='24'/> Title Language",
+                    zhHans: "<img src='img/icon/titlelang.png' width='24'/> 作品名语言"
+                }
             }
         ]
         let unified_value={
@@ -334,6 +347,12 @@
                     style:1,
 
                     checkVal:"naughtiness"
+                },
+                {
+                    id:'value_titlelang',
+                    style:3,
+
+                    checkVal:"titleLang"
                 }
             ],
             translation:{
@@ -355,6 +374,16 @@
                     zhHans:{
                         [true]:"启用",
                         [false]:"禁用"
+                    }
+                },
+                [3]:{
+                    en:{
+                        [true]:"Always English",
+                        [false]:"Follows overall"
+                    },
+                    zhHans:{
+                        [true]:"设为英文",
+                        [false]:"跟随语言设定"
                     }
                 }
             }
@@ -425,6 +454,12 @@
             changeMade();
             transFlush();
         }
+        function changeTitle(){
+            optionTable.titleLang=!optionTable.titleLang;
+            localStorage.setItem("titleLang",optionTable.titleLang);
+            changeMade();
+            transFlush();
+        }
         function langValidation(){
             l=optionTable.language;
             if(l!='en'&&l!='zhHans'){
@@ -451,6 +486,8 @@
         document.getElementById('goBack').addEventListener('click',creditsHide);
         document.getElementById('value_animreduce').addEventListener('click',changeAnim);
         document.getElementById('option_animreduce').addEventListener('click',changeAnim);
+        document.getElementById('value_titlelang').addEventListener('click',changeTitle);
+        document.getElementById('option_titlelang').addEventListener('click',changeTitle);
         document.getElementById('value_reset').addEventListener('click',nukeit);
         document.getElementById('option_reset').addEventListener('click',nukeit);
         langValidation();

@@ -13,6 +13,12 @@
             margin-bottom: 0px;
             line-height: 1.2;
         }
+        .dw{
+            color: rgb(153, 98, 255);
+        }
+        .lw{
+            color: rgb(255, 255, 130);
+        }
     </style>
 </head>
 <body>
@@ -24,34 +30,36 @@
 
     <div class="topbar" id="topbar">
         <span style="cursor: pointer;" onclick="sbShow()">◇☰</span>
-        <span id="pageTitle" inert><img src="img/starrystopicon.png" height="30"/> &times; <img src="img/subliminallogo.png" height="24"></span>
+        <span id="pageTitle" inert><img src="img/starrystopicon.png" height="30"/> &times; <img id="logoEN" src="img/subliminallogo.png" height="24"><img id="logoCN" src="img/subliminalCHlogo.png" height="24" style="display: none;"></span>
     </div>
 
     <div class="content" id="content">
         <h1 class="centered">IMPORTANT PLACES</h1>
-        <div class="textbox-short interact" id="hmt">Hometown</div>
+        <div class="textbox-short interact" id="hmt"><span class="lw">LW</span> Hometown</div>
         <div class="pagehidden" id="hmtc">
             <p>Where the lightners live. Things usually appear normal there as the lightners lived their normal lives, until something truly interesting happens...</p>
             <p>...PHOTON READING NEGATIVE.</p>
+            <p>Due to how File isn't really planning on having the Light World as a place for exploring, the size of the Hometown will most likely not exceed 1000&times;1000.</p>
         </div>
-        <div class="textbox-short interact" id="cst">Castle Town</div>
+        <div class="textbox-short interact" id="cst"><span class="dw">DW</span> Castle Town</div>
         <div class="pagehidden" id="cstc">
-            <p>
-                Where the darkners live and where the Grand Fountain sits. Not much is currently known.
-            </p>
+            <p>Where the darkners live and where the Grand Fountain sits. Not much is currently known.</p>
+            <p>Though, at least we already knew that something interesting will most likely happen here...</p>
         </div>
     </div>
 
     <div class="content" id="contentCN" style="display: none;">
         <h1 class="centered">重要地点</h1>
-        <div class="textbox-short interact" id="hmt_z">家乡小镇</div>
+        <div class="textbox-short interact" id="hmt_z"><span class="lw">光世界</span> 家乡小镇</div>
         <div class="pagehidden" id="hmt_zc">
             <p>光之民们（包含人类、怪物等）的住处。作为光世界内的一个地点，我们故事的光之民主人公们在这里休养生息，平时非常出奇的事情也不是很多。当然，这种情况只会持续到一个非常有意思的事情发生为止。</p>
             <p>……光子读数为负。</p>
+            <p>由于File并不打算把光世界作为探索的主要地点，家乡小镇的大小很可能不会超过1000&times;1000。</p>
         </div>
-        <div class="textbox-short interact" id="cst_z">城堡小镇</div>
+        <div class="textbox-short interact" id="cst_z"><span class="dw">暗世界</span> 城堡小镇</div>
         <div class="pagehidden" id="cst_zc">
             <p>暗之民们的住处。目前对于这里我们知道的并不多。</p>
+            <p>不过，至少我们知道在这种地方很可能会发生一些很有趣的事情……</p>
         </div>
     </div>
     

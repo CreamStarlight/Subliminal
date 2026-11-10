@@ -17,6 +17,17 @@
         .grayout{
             color: gray;
         }
+        input{
+            border:none;
+            border-bottom: 2px white solid;
+            background: none;
+            color:white;
+            font-family: 'DeterminationSans';
+            font-size:24px;
+        }
+        input:focus{
+            outline:0;
+        }
     </style>
 </head>
 <body>
@@ -28,7 +39,7 @@
 
     <div class="topbar" id="topbar">
         <span style="cursor: pointer;" onclick="sbShow()">◇☰</span>
-        <span id="pageTitle" inert><img src="img/starrystopicon.png" height="30"/> &times; <img src="img/subliminallogo.png" height="24"></span>
+        <span id="pageTitle" inert><img src="img/starrystopicon.png" height="30"/> &times; <img id="logoEN" src="img/subliminallogo.png" height="24"><img id="logoCN" src="img/subliminalCHlogo.png" height="24" style="display: none;"></span>
     </div>
 
     <div class="content" id="content" style="user-select: none;">
@@ -37,7 +48,7 @@
             <div style="display: flex; flex-direction: row; margin: 8px 0px;">
                 <div style="width: 200px;" id="stat_name">You're known as</div>
                 <div style="width: 300px; text-align: right;" id="value_name"></div>
-                <input style="display:none; width:300px; border:none; background: none; color:white; font-family: 'DeterminationSans'; font-size:24px; text-align: right;" type="text" id="input_name" placeholder="Tell us your name?"/>
+                <input style="text-align: right;width:300px;display:none;" type="text" id="input_name" placeholder="Tell us your name?" onblur="endInput();"/>
             </div>
             <div style="display: flex; flex-direction: row; margin: 8px 0px;">
                 <div style="width: 200px;" id="stat_egg">Eggs</div>
@@ -59,18 +70,68 @@
                 def: "<span style='filter: opacity(50%);'>what is your name anyway?</span>"
             }
         }
+        let transtable=[
+            {
+                id:'title',
+                con:{
+                    en:"STATISTICS",
+                    zhHans:"统计数据"
+                }
+            },
+            {
+                id:'stat_name',
+                con:{
+                    en:"You're known as",
+                    zhHans:"你的名字是"
+                }
+            },
+            {
+                id:'stat_egg',
+                con:{
+                    en:'Eggs',
+                    zhHans:'蛋'
+                }
+            },
+            {
+                id:'value_name',
+                con:{
+                    en:"<span style='filter: opacity(50%);'>what is your name anyway?</span>",
+                    zhHans:"<span style='filter: opacity(50%);'>……呃，是啥来着？</span>"
+                },
+                cond:function(){
+                    return (statTable.name.val==statTable.name.def);
+                }
+            }
+        ]
+        function transFlush(){
+            const la=localStorage.getItem('language')
+            transtable.forEach(elem => {
+                if(elem.cond!=null){
+                    if(elem.cond()){
+                        document.getElementById(elem.id).innerHTML=elem.con[la];
+                    }
+                }else{
+                    document.getElementById(elem.id).innerHTML=elem.con[la];
+                }
+            });
+            if(la=='en'){
+                document.getElementById('input_name').placeholder='Tell us your name?'
+            }else{
+                document.getElementById('input_name').placeholder='告诉我们你的名字吧？'
+            }
+        }
         function getStat(){
             for (let stat in statTable){
                 const v=localStorage.getItem(stat);
                 const typ=statTable[stat].type;
                 if(typ=="int"){
-                    if(v==""||v==null){
+                    if(v==""||v==null||v==undefined){
                         statTable[stat].val=statTable[stat].def;
                     }else{
                         statTable[stat].val=Math.floor(Number(v));
                     }
                 }else if(typ=="num"){
-                    if(v==""||v==null){
+                    if(v==""||v==null||v==undefined){
                         statTable[stat].val=statTable[stat].def;
                     }else{
                         statTable[stat].val=Number(v);
@@ -86,7 +147,7 @@
                         statTable[stat].val=statTable[stat].def;
                     }
                 }else if(typ=="str"){
-                    if(v==""||v==null){
+                    if(v==""||v==null||v==undefined){
                         statTable[stat].val=statTable[stat].def;
                         
                     }else{
@@ -106,6 +167,7 @@
             }
             document.getElementById("value_name").style.display="none";
             document.getElementById("input_name").style.display="block";
+            document.getElementById('input_name').focus();
         }
         function endInput(){
             let v=document.getElementById('input_name').value;
@@ -123,6 +185,7 @@
         });
         getStat();
         updateStat();
+        transFlush();
     </script>
     
 </body>
