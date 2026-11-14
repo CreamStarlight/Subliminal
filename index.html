@@ -26,9 +26,9 @@
             <img src="img/subliminalHD.png" class="autoshrink" />
             <p class="outlined" id="sign">P R E L U D E</p>
             <p class="outlined" id="signCN" style="display: none;">序&emsp;&emsp;幕</p>
-            <p class="outlined" style="margin-top: 20px; margin-bottom: 0px;" id="sign2">Minecraft Server Opening Time</p>
-            <p class="outlined" style="margin-top: 20px; margin-bottom: 0px; display:none;" id="signCN2">距离《我的世界》服务器正式启动还有</p>
-            <p style="margin-top: 0px; letter-spacing: 10px; font-size: 48px;" class="outlined" id="DESULTORYTIMER">?? : ?? : ?? : ??</p>
+            <p class="outlined" style="margin-top: 20px; margin-bottom: 0px;" id="sign2">Est. Minecraft Server Opening Time</p>
+            <p class="outlined" style="margin-top: 20px; margin-bottom: 0px; display:none;" id="signCN2">距离《我的世界》服务器正式启动大概还有</p>
+            <p style="margin-top: 0px; font-size: 48px;" class="outlined" id="TIMER">?? : ?? : ?? : ??</p>
             
         </div>
     </div>
@@ -36,6 +36,33 @@
         if(localStorage.getItem('animReduce')=='true'){
             document.getElementById("float").className='centered';
         }
+        var rel=new Date(Date.parse('2026-11-16T00:00:00'));
+        function getUTCTime() {
+	        let d1 = new Date();
+    	    let d2 = new Date(d1.getUTCFullYear(), d1.getUTCMonth(), d1.getUTCDate(), d1.getUTCHours(), d1.getUTCMinutes(), d1.getUTCSeconds());
+	        return Date.parse(d2);
+        }
+        function o(){
+            const e=document.getElementById('TIMER');
+            var f='';
+            var diff=Math.max(0,rel-getUTCTime());
+            var days=Math.floor(diff/(86400000));
+            var hrs=Math.floor((diff/(3600000))%24);
+            var mns=Math.floor((diff/(60000))%60);
+            var scs=Math.floor((diff/(1000))%60);
+            if(days<10)f=f+'0';
+            f=f+days.toString()+' : ';
+            if(hrs<10)f=f+'0';
+            f=f+hrs.toString()+' : ';
+            if(mns<10)f=f+'0';
+            f=f+mns.toString()+' : ';
+            if(scs<10)f=f+'0';
+            f=f+scs.toString();
+            e.textContent=f;
+            return;
+        }
+        o();
+        setInterval(o,1000);
     </script>
 
     <div class="centered" style="margin-top: 200px;" id="prologue">
