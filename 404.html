@@ -27,7 +27,7 @@
     </div>
     <img id="FRIEND" src="img/IMAGE_FRIEND.png" style="position: absolute; bottom: 112px; right: 44px; opacity: 5%;"/>
     <div class="main centered" id="menuCN" style="display: none;">
-        <img src="img/forgotten_tree.gif"/>
+        <img src="img/forgotten_tree.gif" id="forgotten2"/>
         <p>这里什么也没有。</p>
         <p>那棵树，和树下的人，除外。</p>
     </div>
@@ -69,6 +69,7 @@
             noTree();
         }else{
             document.getElementById('forgotten').addEventListener('click',getEgg);
+            document.getElementById('forgotten2').addEventListener('click',getEgg);
         }
         document.getElementById('FRIEND').addEventListener('click',hint);
     </script>
