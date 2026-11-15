@@ -25,7 +25,7 @@
         <p>There is nothing.</p>
         <p>Except for the tree and the man.</p>
     </div>
-    <img id="FRIEND" src="img/IMAGE_FRIEND.png" style="position: absolute; bottom: 112px; right: 44px; opacity: 5%;"/>
+    <img id="FRIEND" src="img/IMAGE_FRIEND.png" style="position: absolute; bottom: 112px; right: 44px; opacity: 5%;" onclick="hint()"/>
     <div class="main centered" id="menuCN" style="display: none;">
         <img src="img/forgotten_tree.gif" id="forgotten2"/>
         <p>这里什么也没有。</p>
@@ -71,7 +71,6 @@
             document.getElementById('forgotten').addEventListener('click',getEgg);
             document.getElementById('forgotten2').addEventListener('click',getEgg);
         }
-        document.getElementById('FRIEND').addEventListener('click',hint);
     </script>
 </body>
 </html>
