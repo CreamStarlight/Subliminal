@@ -39,6 +39,7 @@
         }
         function getEgg(){
             localStorage.setItem('egg',1);
+            hint()
             noTree();
             const c=document.getElementById('menu');
             const cc=document.getElementById('menuCN');
@@ -67,9 +68,12 @@
         }
         if(Number(localStorage.getItem('egg'))>0){
             noTree();
+            document.getElementById('menu').addEventListener('click',hint,{once:true});
+            document.getElementById('menuCN').addEventListener('click',hint,{once:true});
         }else{
             document.getElementById('forgotten').addEventListener('click',getEgg);
             document.getElementById('forgotten2').addEventListener('click',getEgg);
+            
         }
     </script>
 </body>
