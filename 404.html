@@ -25,13 +25,11 @@
         <p>There is nothing.</p>
         <p>Except for the tree and the man.</p>
     </div>
-    <img id="FRIEND" src="img/IMAGE_FRIEND.png" style="position: absolute; bottom: 112px; right: 44px; opacity: 5%;" onclick="hint()"/>
     <div class="main centered" id="menuCN" style="display: none;">
         <img src="img/forgotten_tree.gif" id="forgotten2"/>
         <p>这里什么也没有。</p>
         <p>那棵树，和树下的人，除外。</p>
     </div>
-    <audio id="friend_laugh" type="audio/ogg" src="snd/ITS_LAUGH.ogg" preload style="display: none;"></audio>
     <script>
         function noTree(){
             document.getElementById('menu').innerHTML='<p>There is nothing.</p>';
@@ -53,23 +51,8 @@
             }
             
         }
-        function hint(){
-            let e=document.createElement('p');
-            e.style.textAlign='right';
-            e.style.position='absolute';
-            e.style.bottom="10px";
-            e.style.right='44px';
-            e.style.opacity=0.05;
-            e.innerHTML='Have you thought of giving a visit of the unlisted save page?<br/>Try clicking a lot...';
-            const aud=document.getElementById('friend_laugh');
-            aud.play();
-            document.body.insertBefore(e,document.getElementById('FRIEND'));
-            document.getElementById('FRIEND').style.display='none';
-        }
         if(Number(localStorage.getItem('egg'))>0){
             noTree();
-            document.getElementById('menu').addEventListener('click',hint,{once:true});
-            document.getElementById('menuCN').addEventListener('click',hint,{once:true});
         }else{
             document.getElementById('forgotten').addEventListener('click',getEgg);
             document.getElementById('forgotten2').addEventListener('click',getEgg);
