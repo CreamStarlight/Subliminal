@@ -97,7 +97,7 @@
         <div class="textbox-short interact" id="wld">WORLD OVERVIEW</div>
         <div class="textbox-short interact" id="pcs">IMPORTANT PLACES</div>
         <div class="textbox-short inaccessible" id="evt">SIGNIFICANT EVENTS</div>
-        <div class="textbox-short inaccessible" id="crc">CHARACTERS</div>
+        <div class="textbox-short interact" id="crc">CHARACTERS</div>
         <div class="textbox-short inaccessible" id="mrl">MIRU'S LOG</div>
     </div>
     <div class="main centered" id="menuCN" style="display: none;">
@@ -106,7 +106,7 @@
         <div class="textbox-short interact" id="wldb">世界总览</div>
         <div class="textbox-short interact" id="pcsb">重要地点</div>
         <div class="textbox-short inaccessible" id="evtb">重大事件（无法访问）</div>
-        <div class="textbox-short inaccessible" id="crcb">角色（无法访问）</div>
+        <div class="textbox-short interact" id="crcb">角色（本地化未完成）</div>
         <div class="textbox-short inaccessible" id="mrlb">米露的日志（无法访问）</div>
     </div>
     <script>
@@ -119,6 +119,9 @@
         document.getElementById('wld').addEventListener("click", function(){
             window.location.replace("worlds.html");
         })
+        document.getElementById('crc').addEventListener("click", function(){
+            window.location.replace("characters.html");
+        })
 
         document.getElementById('ovvb').addEventListener("click", function(){
             window.location.replace("overview.html");
@@ -128,6 +131,9 @@
         })
         document.getElementById('wldb').addEventListener("click", function(){
             window.location.replace("worlds.html");
+        })
+        document.getElementById('crcb').addEventListener("click", function(){
+            window.location.replace("characters.html");
         })
     </script>
 </body>

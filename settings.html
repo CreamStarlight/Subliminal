@@ -50,6 +50,10 @@
                 <div style="width: 300px;" id="option_naughtiness">Informality</div>
                 <div style="width: 200px; text-align: right;" id="value_naughtiness">Off</div>
             </div>
+            <div style="display: flex; flex-direction: row; margin: 8px 0px;" class="inaccessible">
+                <div style="width: 300px;" id="option_banner">Banner Theme</div>
+                <div style="width: 200px; text-align: right;" id="value_banner">The Fountain</div>
+            </div>
             <div style="display: flex; flex-direction: row; margin: 8px 0px;" class="interact">
                 <div style="width: 300px;" id="option_credits">Credits</div>
                 <div style="width: 200px; text-align: right;" id="value_credits">Let's roll!</div>
@@ -69,7 +73,7 @@
     </div>
     
     <div class="centered text-left insignificant" style="position: absolute; bottom: 8px; left: 8px;">
-        Subliminal Website v0.2.6.0<br/>
+        Subliminal Website v0.3.0.0<br/>
         &copy; Cream Starlight 2026<br/>
         Chn i18n &copy; Cream & Riversi 2026<br/>
         Subliminal &copy; unsupportedfiletype 2026
@@ -241,13 +245,15 @@
             naughtiness:false,
             animReduce:false,
             fallback:false,
-            titleLang:false
+            titleLang:false,
+            banner:1
         }
         const defaultSettings={
             naughtiness:false,
             animReduce:false,
             fallback:false,
-            titleLang:false
+            titleLang:false,
+            banner:1
         }
         let transtable=[
             {
@@ -333,6 +339,13 @@
                     en: "<img src='img/icon/titlelang.png' width='24'/> Title Language",
                     zhHans: "<img src='img/icon/titlelang.png' width='24'/> 作品名语言"
                 }
+            },
+            {
+                id:'option_banner',
+                con:{
+                    en: "<img src='img/icon/banner.png' width='24'/> Banner Theme",
+                    zhHans: "<img src='img/icon/banner.png' width='24'/> 横幅主题"
+                }
             }
         ]
         let unified_value={
@@ -353,6 +366,11 @@
                     style:3,
 
                     checkVal:"titleLang"
+                },
+                {
+                    id:'value_banner',
+                    style:4,
+                    checkVal:"banner"
                 }
             ],
             translation:{
@@ -385,13 +403,24 @@
                         [true]:"设为英文",
                         [false]:"跟随语言设定"
                     }
+                },
+                [4]:{
+                    en:{
+                        [1]:"The Fountain",
+                        [2]:"???"
+                    },
+                    zhHans:{
+                        [1]:"黑暗喷泉",
+                        [2]:"???"
+                    }
                 }
             }
         }
         function getSettings(){
             for (let setting in optionTable) {
                 const v=localStorage.getItem(setting);
-                if(v=="" || v==null){
+                console.log(setting+":"+v);
+                if(v=="" || v==null || v==undefined){
                     localStorage.setItem(setting, optionTable[setting]);
                     continue;
                 }
@@ -408,6 +437,7 @@
                     continue;
                 }
                 optionTable[setting]=v;
+                
             }
         }
         optionTable.language=localStorage.getItem("language");

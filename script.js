@@ -33,7 +33,8 @@ var optionTable={
     naughtiness:false,
     animReduce:false,
     fallback:false,
-	titleLang:false
+	titleLang:false,
+	banner:1
 }
 
 function getSettings(){
